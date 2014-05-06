@@ -1,0 +1,14 @@
+local i=1
+local j=1
+
+args = {...}
+depth = args[1]
+
+os.loadAPI("/APIs/location")
+
+for i=1, depth
+  do turtle.digDown()
+   location.down()
+end
+
+location.goHome()

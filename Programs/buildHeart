@@ -1,0 +1,41 @@
+os.loadAPI("/APIs/location")
+os.loadAPI("/Programs/do")
+
+arg={...}
+size=arg[1]
+
+if size==nil
+	then size=1
+end
+
+function heart1()
+end
+
+function heart2()
+end
+
+function heart3()
+end
+
+function heart4()
+end
+
+function heart5()
+end
+
+function heart6()
+end
+
+if size==1
+	then heart1()
+elseif size==2
+	then heart2()
+elseif size==3
+	then heart3()
+elseif size==4
+	then heart4()
+elseif size==5
+	then heart5()
+elseif size==6
+	then heart6()
+end

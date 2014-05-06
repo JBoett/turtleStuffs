@@ -1,0 +1,68 @@
+arg = {...}
+x = arg[1]
+y = arg[2]/2
+z = arg[3]
+
+os.loadAPI("/APIs/location")
+
+function dig()
+    turtle.dig()
+    turtle.digDown()
+    location.forward()
+end
+
+function line()
+  for i=1, x-1
+    do dig()
+  end
+  turtle.digDown()
+end
+
+function aboutFace()
+  if right==true
+   then
+    location.turnRight()
+    turtle.dig()
+    location.forward()
+    location.turnRight()
+  else
+    location.turnLeft()
+    turtle.dig()
+    location.forward()
+    location.turnLeft()
+  end
+  right=not right
+end
+
+function layer()
+  right=true
+  for i=1, z-1
+    do line()
+      aboutFace()
+  end
+  line()
+end
+
+function nextLayer()
+  location.down()
+  turtle.digDown()
+  location.down()
+  
+  if math.fmod(z, 2)==0
+    then location.turnRight()
+  else
+    location.turnRight()
+    location.turnRight()
+  end
+end
+
+
+
+--logic--
+
+for i=1, y-1
+  do layer()
+    nextLayer()
+end
+layer()
+location.goHome()

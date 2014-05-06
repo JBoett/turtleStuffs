@@ -1,0 +1,42 @@
+os.loadAPI("/APIs/location")
+
+arg = {...}
+direction = arg[1]
+size = arg[2]
+
+function stairsUp()
+  for i=1, size
+    do turtle.digUp()
+      if turtle.detect() == false
+        then turtle.place()
+      end
+      location.up()
+      turtle.select(1)
+      turtle.digUp()
+      turtle.dig()
+      location.forward()
+      turtle.select(1)
+  end
+end
+
+function stairsDown()
+  for i=1, size
+    do turtle.digUp()
+      turtle.dig()
+      location.forward()
+      turtle.select(1)
+      turtle.digUp()
+      turtle.digDown()
+      location.down()
+      turtle.select(1)
+      if turtle.detectDown() == false
+        then turtle.placeDown()
+      end
+  end
+end
+
+if direction =="up"
+  then stairsUp()
+else
+  stairsDown()
+end

@@ -1,0 +1,13 @@
+os.loadAPI("/APIs/location")
+
+args = {...}
+length = args[1]
+
+for i=1, length
+	do turtle.digUp()
+		turtle.dig()
+		turtle.digDown()
+		location.forward()
+end
+
+location.goHome()

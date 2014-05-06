@@ -1,0 +1,158 @@
+os.loadAPI("/APIs/refuel")
+
+modem=peripheral.wrap("right")
+modem.open(1337)
+rednet.open("right")
+
+
+x=0
+y=0
+z=0
+dir=1
+--1 is the direction he was facing when he was placed, 2 is right, three is behind and 4 is left--
+
+function turnRight(R)
+	if R==nil
+		then R=1
+	end
+	for i=1,R
+	 do turtle.turnRight()
+		if dir<4
+		 then dir=dir+1
+		else
+		 dir=1
+		end
+	end
+end
+
+function turnLeft(L)
+	if L==nil
+		then L=1
+	end
+	for i=1,L
+	 do turtle.turnLeft()
+		if dir>1
+			then dir=dir-1
+		else
+			dir=4
+		end
+	end
+end
+
+function up(U)
+	if U==nil
+		then U=1
+	end
+	worked=true
+	for i=1, U
+		do
+		if turtle.up()
+		then worked=true
+			y=y+1
+		else worked=false
+		end
+	end
+	refuel.refuel()
+	rednet.broadcast(x.." "..y.." "..z)
+end
+
+function down(D)
+	if D==nil
+		then D=1
+	end
+	worked=true
+	for i=1, D
+		do
+			if turtle.down()
+			then worked=true
+				y=y-1
+			else worked=false
+			end
+	end
+	refuel.refuel()
+	rednet.broadcast(x.." "..y.." "..z)
+end
+
+function forward(F)
+	if F==nil
+		then F=1
+	end
+	worked=true
+	for i=1, F
+	 do
+	 	if turtle.forward()
+		then worked=true
+			if dir==1
+				then x=x+1
+			elseif dir==2
+				then z=z+1
+			elseif dir==3
+				then x=x-1
+			else
+				z=z-1
+			end
+		else worked=false
+		end
+	end
+	refuel.refuel()
+	rednet.broadcast(x.." "..y.." "..z)
+end
+
+function faceDir(fD)
+	while dir~=fD
+	 do turnRight()
+	end
+end
+
+function goHome()
+	if y>=0
+		then for i=1, y
+				do turtle.digDown()
+				while down()==false
+					do turtle.digDown()
+				end
+			end
+	else
+		for i=1, -y
+			do turtle.digsUp()
+			while up()==false
+				do turtle.digUp()
+			end
+		end
+	end
+	if x>0
+		then faceDir(3)
+			for i=1, x
+				do turtle.dig()
+				while forward()==false
+					do turtle.dig()
+				end
+			end
+	elseif x<0
+		then faceDir(1)
+			for i=1, -x
+				do turtle.dig()
+				while forward()==false
+					do turtle.dig()
+				end
+			end
+	end
+	if z>0
+		then faceDir(4)
+			for i=1, z
+				do turtle.dig()
+				while forward()==false
+					do turtle.dig()
+				end
+			end
+	elseif z<0
+		then faceDir(4)
+			for i=1, z
+				do turtle.dig()
+				while forward()==false
+					do turtle.dig()
+				end
+			end
+	end
+	faceDir(1)
+end

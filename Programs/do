@@ -1,0 +1,112 @@
+os.loadAPI("/APIs/location")
+
+arg={...}
+
+
+function digUp(a)
+	for i=1, a
+		do turtle.digUp()
+	end
+end
+
+function digDown(a)
+	for i=1, a
+		do turtle.digDown()
+	end
+end
+
+function digForward(a)
+	for i=1, a
+		do turtle.dig()
+	end
+end
+
+function turnRight(a)
+	for i=1, a
+		do location.turnRight()
+	end
+end
+
+function turnLeft(a)
+	for i=1, a
+		do location.turnLeft()
+	end
+end
+
+function moveForward(a)
+	for i=1, a
+		do location.forward()
+	end
+end
+
+function moveUp(a)
+	for i=1, a
+		do location.up()
+	end
+end
+
+function moveDown(a)
+	for i=1, a
+		do location.down()
+	end
+end
+
+function placeForward(a)
+	for i=1, a
+		do turtle.place()
+	end
+end
+
+function placeUp(a)
+	for i=1, a
+		do turtle.placeUp()
+	end
+end
+
+function placeDown(a)
+	for i=1, a
+		do turtle.placeDown()
+	end
+end
+
+
+function amount(n)--takes an index--returns number of next index or returns 1--
+	if arg[n+1]==nil
+		then return 1
+	elseif  tonumber(arg[n+1])==nil
+		then return 1
+	else
+		return arg[n+1]
+	end
+end
+
+--logic--
+
+for i=1, #arg
+	do
+	a=amount(i)
+	m=arg[i]
+		if m=="pf"
+			then placeForward(a)
+		elseif m=="pd"
+			then placeDown(a)
+		elseif m=="pu"
+			then placeUp(a)
+		elseif m=="mf"
+			then moveForward(a)
+		elseif m=="md"
+			then moveDown(a)
+		elseif m=="mu"
+			then moveUp(a)
+		elseif m=="df"
+			then digForward(a)
+		elseif m=="dd"
+			then digDown(a)
+		elseif m=="du"
+			then digUp(a)
+		elseif m=="tr"
+			then turnRight(a)
+		elseif m=="tl"
+			then turnLeft(a)
+		end
+end

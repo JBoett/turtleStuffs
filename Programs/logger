@@ -1,0 +1,17 @@
+
+os.loadAPI("/APIs/location")
+
+arg = {...}
+height = arg[1]
+
+turtle.dig()
+
+location.forward()
+
+for i=1, height
+  do turtle.digUp()
+  	location.up()
+end
+
+location.goHome()
+

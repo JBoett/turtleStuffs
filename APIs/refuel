@@ -1,0 +1,13 @@
+function refuel()
+  while turtle.getFuelLevel() <= 10
+    do
+      for i=1, 16
+        do turtle.select(i)
+          turtle.refuel(1)
+          if turtle.refuel()==true
+            then return true
+          end
+      end
+    return false
+  end
+end
