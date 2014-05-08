@@ -107,7 +107,7 @@ function goHome()
 			end
 	else
 		for i=1, -y
-			do turtle.digsUp()
+			do turtle.digUp()
 			while up()==false
 				do turtle.digUp()
 			end
