@@ -39,13 +39,10 @@ function up(U)
 	if U==nil
 		then U=1
 	end
-	worked=true
 	for i=1, U
 		do
-		if turtle.up()
-		then worked=true
-			y=y+1
-		else worked=false
+		while turtle.up()==false
+			do turtle.digUp()
 		end
 	end
 	refuel.refuel()
@@ -55,14 +52,11 @@ function down(D)
 	if D==nil
 		then D=1
 	end
-	worked=true
 	for i=1, D
 		do
-			if turtle.down()
-			then worked=true
-				y=y-1
-			else worked=false
-			end
+		while turtle.down()==false
+			do turtle.digDown()
+		end
 	end
 	refuel.refuel()
 end
@@ -71,21 +65,19 @@ function forward(F)
 	if F==nil
 		then F=1
 	end
-	worked=true
 	for i=1, F
 	 do
-	 	if turtle.forward()
-		then worked=true
-			if dir==1
-				then x=x+1
-			elseif dir==2
-				then z=z+1
-			elseif dir==3
-				then x=x-1
-			else
-				z=z-1
-			end
-		else worked=false
+	 while turtle.forward()==false
+	 	do turtle.dig()
+	 end
+		if dir==1
+			then x=x+1
+		elseif dir==2
+			then z=z+1
+		elseif dir==3
+			then x=x-1
+		else
+			z=z-1
 		end
 	end
 	refuel.refuel()
@@ -99,52 +91,35 @@ end
 
 function goHome()
 	if y>=0
-		then for i=1, y
-				do turtle.digDown()
-				while down()==false
-					do turtle.digDown()
-				end
-			end
+		then
+		for i=1, y
+			do down()
+		end
 	else
 		for i=1, -y
-			do turtle.digUp()
-			while up()==false
-				do turtle.digUp()
-			end
+			do up()
 		end
 	end
 	if x>0
 		then faceDir(3)
 			for i=1, x
-				do turtle.dig()
-				while forward()==false
-					do turtle.dig()
-				end
+				do forward()
 			end
 	elseif x<0
 		then faceDir(1)
 			for i=1, -x
-				do turtle.dig()
-				while forward()==false
-					do turtle.dig()
-				end
+				do forward()
 			end
 	end
 	if z>0
 		then faceDir(4)
 			for i=1, z
-				do turtle.dig()
-				while forward()==false
-					do turtle.dig()
-				end
+				do forward()
 			end
 	elseif z<0
 		then faceDir(4)
 			for i=1, z
-				do turtle.dig()
-				while forward()==false
-					do turtle.dig()
-				end
+				do forward()
 			end
 	end
 	faceDir(1)
